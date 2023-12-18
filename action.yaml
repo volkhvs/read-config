@@ -1,0 +1,19 @@
+name: 'Read Configuration'
+description: 'Read Workflow Configuration'
+inputs:
+  file_path:
+    required: true
+    description: 'Location of workflow config file'
+  parser_type:
+    required: false
+    description: 'Parser to use to parse file, supported values are: yaml, json, toml and properties'
+    default: 'yaml'
+  schema_file_path:
+    required: false
+    description: 'Location of schema for workflow config file'
+outputs:
+  config:
+    description: 'Configuration data read from configuration file'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
