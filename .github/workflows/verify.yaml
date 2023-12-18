@@ -1,0 +1,31 @@
+name: build & verify
+on:
+  pull_request:
+
+jobs:
+  build:
+    name: Verify Branch ${{ github.ref }}
+    runs-on: ubuntu-latest
+    permissions: #
+      contents: write
+      checks: write
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Lint
+        run: npm run lint:check
+
+      - name: Build
+        run: npm run build
+
+      - name: Run Tests with coverage
+        run: npm run test:cov
+
+      - name: Mark Coverage
+        uses: ArtiomTr/jest-coverage-report-action@v2
