@@ -21,8 +21,9 @@ async function run() {
       return;
     }
 
-    // TODO add validation of config
-    const config = parsingResult.data;
+    const config = !schemaFilePath
+      ? parsingResult.data
+      : await validate(parsingResult.data, schemaFilePath);
 
     core.info('Running with config:');
     core.info(JSON.stringify(config, null, 2));
@@ -31,6 +32,14 @@ async function run() {
   } catch (error: unknown) {
     core.setFailed(error as Error);
   }
+}
+
+async function validate(obj: unknown, schemaFilePath: string): Promise<string> {
+  const schemaDynamicImport = await import(schemaFilePath);
+  // We are expecting that all schema files are exporting schema as default
+  return await schemaDynamicImport.default.validate(obj, {
+    stripUnknown: false,
+  });
 }
 
 function createParser(parserType: string, filePath: string): Parser {

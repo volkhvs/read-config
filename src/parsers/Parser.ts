@@ -25,5 +25,6 @@ export abstract class Parser {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   abstract parseContent(fileContent: string): ParsingResult;
 }

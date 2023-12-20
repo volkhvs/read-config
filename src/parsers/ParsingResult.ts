@@ -1,9 +1,19 @@
 export class ParsingResult {
+  public data: object | null;
+
+  public isSuccess: boolean;
+
+  public errorMessage: string | null;
+
   constructor(
-    public data: object | null,
-    public isSuccess: boolean,
-    public errorMessage: string | null,
-  ) {}
+    data: object | null,
+    isSuccess: boolean,
+    errorMessage: string | null,
+  ) {
+    this.errorMessage = errorMessage;
+    this.isSuccess = isSuccess;
+    this.data = data;
+  }
 
   static success(data: object): ParsingResult {
     return new ParsingResult(data, true, null);

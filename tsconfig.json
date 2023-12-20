@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "module": "es2022",
+    "target": "es2022",
     "moduleResolution": "node",
     "types": ["node", "jest"],
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "esModuleInterop": true,
     "strict": true
   }
 }

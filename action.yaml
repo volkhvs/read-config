@@ -15,5 +15,5 @@ outputs:
   config:
     description: 'Configuration data read from configuration file'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'

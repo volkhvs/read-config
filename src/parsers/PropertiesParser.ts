@@ -4,6 +4,9 @@ import { ParsingResult } from './ParsingResult';
 
 export class PropertiesParser extends Parser {
   parseContent(fileContent: string): ParsingResult {
+    if (fileContent.trim() === '') {
+      return ParsingResult.failure('Empty properties file content!');
+    }
     const obj: any = {};
     const lines = fileContent.split('\n');
 
@@ -66,6 +69,6 @@ export class PropertiesParser extends Parser {
     ) {
       return value.toLowerCase() === 'true';
     }
-    return value;
+    return value.replace(/^"(.+(?="$))"$/, '$1');
   }
 }

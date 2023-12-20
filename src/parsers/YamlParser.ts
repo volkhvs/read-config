@@ -2,7 +2,6 @@
 import { Parser } from './Parser';
 import * as yaml from 'js-yaml';
 import { ParsingResult } from './ParsingResult';
-import * as core from '@actions/core';
 
 export class YamlParser extends Parser {
   parseContent(fileContent: string): ParsingResult {

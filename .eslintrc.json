@@ -6,12 +6,18 @@
     "node": true
   },
   "extends": "eslint:recommended",
+  "parser": "@typescript-eslint/parser",
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 2022
+    "ecmaVersion": 2020,
+    "sourceType": "module"
   },
-  "rules": {}
+  "rules": {
+    "no-unused-vars": "error",
+    "no-console": 1,
+    "no-unexpected-multiline": "error"
+  }
 }

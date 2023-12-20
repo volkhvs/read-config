@@ -1,0 +1,13 @@
+execute_tests_on_main_branch = true
+
+[java]
+version = "17"
+distribution = "temurin"
+
+[[modules]]
+name = "module-1"
+path = "src/module1"
+
+[[modules]]
+name = "module-2"
+path = "src/module2"

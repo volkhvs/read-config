@@ -5,6 +5,9 @@ import { ParsingResult } from './ParsingResult';
 
 export class TomlParser extends Parser {
   parseContent(fileContent: string): ParsingResult {
+    if (fileContent.trim() === '') {
+      return ParsingResult.failure('Empty TOML file content!');
+    }
     const result = toml.parse(fileContent);
     if (!result) {
       return ParsingResult.failure(
