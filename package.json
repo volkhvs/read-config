@@ -8,6 +8,7 @@
     "test": "jest",
     "all": "npm run build && npm run test",
     "test:cov": "jest --coverage",
+    "ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint --fix --max-warnings 0 \"**/*.{ts, tsx}\"",
