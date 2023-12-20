@@ -1,0 +1,17 @@
+{
+  "java": {
+    "version": "17",
+    "distribution": "temurin"
+  },
+  "execute_tests_on_main_branch": true,
+  "modules": [
+    {
+      "name": "module-1",
+      "path": "src/module1"
+    },
+    {
+      "name": "module-2",
+      "path": "src/module2"
+    }
+  ]
+}
