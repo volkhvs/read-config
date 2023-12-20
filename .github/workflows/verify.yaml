@@ -1,8 +1,8 @@
 name: build & verify
 on:
   pull_request_target:
-    branches:
-      - *
+    types:
+      - opened
 
 jobs:
   build:
