@@ -8,6 +8,8 @@ jobs:
     permissions: #
       contents: write
       checks: write
+      statuses: write
+      pull-requests: write
     steps:
       - name: "Checkout Repository"
         uses: actions/checkout@v4
