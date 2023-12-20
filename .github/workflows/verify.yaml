@@ -1,17 +1,18 @@
-name: build & verify
+name: Build & Verify
 on:
   pull_request:
+
 jobs:
   build:
     name: Verify Pull Request
     runs-on: ubuntu-latest
-    permissions: #
+    permissions:
       contents: write
       checks: write
       statuses: write
       pull-requests: write
     steps:
-      - name: "Checkout Repository"
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Node.js
