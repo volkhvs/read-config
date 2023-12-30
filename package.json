@@ -11,8 +11,9 @@
     "ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint --fix --max-warnings 0 \"**/*.{ts, tsx}\"",
-    "lint:check": "eslint --max-warnings 0 \"**/*.{ts, tsx}\"",
+    "lint": "eslint --fix --max-warnings 0 src/*",
+    "lint:check": "eslint --max-warnings 0 src/*",
+    "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
   "jest": {
@@ -27,7 +28,8 @@
     "*.{ts,tsx}": [
       "npm run format",
       "npm run lint"
-    ]
+    ],
+    "*.js": "eslint --cache --fix"
   },
   "importSort": {
     ".js, .ts": {

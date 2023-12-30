@@ -5,6 +5,11 @@ import { JsonParser } from './parsers/JsonParser';
 import { TomlParser } from './parsers/TomlParser';
 import { PropertiesParser } from './parsers/PropertiesParser';
 import { ParsingResult } from './parsers/ParsingResult';
+import { TypeScriptSchema } from './schemas/TypeScriptSchema';
+import { Schema } from './schemas/Schema';
+import { SchemaReadResult } from './schemas/SchemaReadResult';
+import { AnyObjectSchema } from 'yup';
+import { NonExistingSchema } from './schemas/NonExistingSchema';
 
 async function run() {
   try {
@@ -13,6 +18,13 @@ async function run() {
     const schemaFilePath = core.getInput('schema_file_path', {
       required: false,
     });
+
+    const schema: Schema = createSchema(schemaFilePath);
+    const schemaParsingResult: SchemaReadResult = await schema.parse();
+    if (!schemaParsingResult.isSuccess && schemaParsingResult.errorMessage) {
+      core.setFailed(schemaParsingResult.errorMessage);
+      return;
+    }
 
     const parser: Parser = createParser(parserType, filePath);
     const parsingResult: ParsingResult = await parser.parse();
@@ -23,7 +35,7 @@ async function run() {
 
     const config = !schemaFilePath
       ? parsingResult.data
-      : await validate(parsingResult.data, schemaFilePath);
+      : await validate(parsingResult.data, schemaParsingResult.data!);
 
     core.info('Running with config:');
     core.info(JSON.stringify(config, null, 2));
@@ -34,10 +46,11 @@ async function run() {
   }
 }
 
-async function validate(obj: unknown, schemaFilePath: string): Promise<string> {
-  const schemaDynamicImport = await import(schemaFilePath);
-  // We are expecting that all schema files are exporting schema as default
-  return await schemaDynamicImport.default.validate(obj, {
+async function validate(
+  obj: unknown,
+  schema: AnyObjectSchema,
+): Promise<string> {
+  return await schema.validate(obj, {
     stripUnknown: false,
   });
 }
@@ -58,6 +71,20 @@ function createParser(parserType: string, filePath: string): Parser {
     }
     default: {
       throw new Error(`Unsupported parser type ${parserType}!`);
+    }
+  }
+}
+
+function createSchema(filePath: string): Schema {
+  if (!filePath) {
+    return new NonExistingSchema(filePath);
+  }
+  switch (filePath.split('.').pop()?.toLowerCase()) {
+    case 'ts': {
+      return new TypeScriptSchema(filePath);
+    }
+    default: {
+      throw new Error(`Unsupported schema type ${filePath}!`);
     }
   }
 }
