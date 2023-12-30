@@ -1,13 +1,8 @@
-/*eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }]*/
 import { Schema } from './Schema';
 import { SchemaReadResult } from './SchemaReadResult';
 import { AnyObjectSchema } from 'yup';
 
 export class TypeScriptSchema extends Schema {
-  parseContent(_fileContent: string): SchemaReadResult {
-    throw new Error('Method not implemented.');
-  }
-
   async parse(): Promise<SchemaReadResult> {
     const isAnyObjectSchemaType = (schema: any): schema is AnyObjectSchema =>
       schema.fields !== undefined;

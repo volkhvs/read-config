@@ -1,6 +1,6 @@
 import { TypeScriptSchema } from './TypeScriptSchema';
 
-describe('TypeScriptConfig', () => {
+describe('TypeScriptSchema', () => {
   it('should correctly parse ts files with schema', async () => {
     const schema = new TypeScriptSchema(
       `${__dirname}/../resources/schema/schema-1.ts`,
