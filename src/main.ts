@@ -10,6 +10,7 @@ import { Schema } from './schemas/Schema';
 import { SchemaReadResult } from './schemas/SchemaReadResult';
 import { AnyObjectSchema } from 'yup';
 import { NonExistingSchema } from './schemas/NonExistingSchema';
+import { JsonSchemaSchema } from './schemas/JsonSchemaSchema';
 
 async function run() {
   try {
@@ -82,6 +83,9 @@ function createSchema(filePath: string): Schema {
   switch (filePath.split('.').pop()?.toLowerCase()) {
     case 'ts': {
       return new TypeScriptSchema(filePath);
+    }
+    case 'json': {
+      return new JsonSchemaSchema(filePath);
     }
     default: {
       throw new Error(`Unsupported schema type ${filePath}!`);

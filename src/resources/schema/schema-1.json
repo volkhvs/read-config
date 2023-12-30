@@ -1,0 +1,41 @@
+{
+  "$schema": "https://volkhvs.github.io/read-config/schema.json",
+  "title": "CiConfig",
+  "description": "CiConfig",
+  "type": "object",
+  "properties": {
+    "java": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "default": "17"
+        },
+        "distribution": {
+          "type": "string"
+        },
+        "installer_path": {
+          "type": "string"
+        }
+      }
+    },
+    "execute_tests_on_main_branch": {
+      "type": "boolean",
+      "required": true
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
