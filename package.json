@@ -13,6 +13,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint --fix --max-warnings 0 \"**/*.{ts, tsx}\"",
     "lint:check": "eslint --max-warnings 0 \"**/*.{ts, tsx}\"",
+    "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
   "jest": {
@@ -27,7 +28,8 @@
     "*.{ts,tsx}": [
       "npm run format",
       "npm run lint"
-    ]
+    ],
+    "*.js": "eslint --cache --fix"
   },
   "importSort": {
     ".js, .ts": {
