@@ -1,4 +1,4 @@
-name: 'Read Configuration'
+name: 'Read Workflow Configuration'
 description: 'Read Workflow Configuration'
 inputs:
   file_path:
